@@ -12,19 +12,9 @@ int main(void)
    int changetotal = round(change * 100);
     
     
-    //obtained change now lets count up the dollars and coins
+    //got change total. let's count the coins
     
-    int cents = changetotal;
-    int dollars = 0;
-    
-    while (cents > 99)
-    {cents = cents - 100;
-    dollars = dollars + 1;
-    }
-    
-    //took out and counted dollars, remaining amount is all coins
-    
-    int dnponly = cents;
+    int dnponly = changetotal;
     int quarters = 0;
     
     while (dnponly > 24)
@@ -62,7 +52,6 @@ int main(void)
    
    int total = pennies + nickels + dimes + quarters;
 
-printf("dollars: %i\n", dollars);    
 printf("quarters: %i\n", quarters);
 printf("dimes: %i\n", dimes);
 printf("nickels: %i\n", nickels);
