@@ -9,6 +9,7 @@ int main(void)
        change = get_float("how much change?\n");
    }
    while (change < 0);
+   
    int changetotal = round(change * 100);
     
     
