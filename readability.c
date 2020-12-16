@@ -16,35 +16,35 @@ int main(void)
     
     for (int i = 0; i < strlen(text); i++)
     {   
-       if isalpha (text[i]) 
-       { 
-           letters = letters +1;
-       }
-       if isspace (text[i])
-       {
-           words = words +1;
-       }
-       if (text[i] =='!' || text[i] =='.' || text[i] =='?')
-       {
-           sentences = sentences +1;
-       }
+        if isalpha(text[i]) 
+        { 
+            letters = letters + 1;
+        }
+        if isspace(text[i])
+        {
+            words = words + 1;
+        }
+        if (text[i] == '!' || text[i] == '.' || text[i] == '?')
+        {
+            sentences = sentences + 1;
+        }
     }
     
-index = .0588*((float)letters/((float)words/(float)100))- .296*((float)sentences/((float)words/(float)100)) - 15.8;
-int grade = round(index);
+    index = .0588 * ((float)letters / ((float)words / (float)100))- .296*((float)sentences/((float)words/(float)100)) - 15.8;
+    int grade = round(index);
 
-if (grade < 1)
-{
-printf("Before Grade 1\n");
-}
-else if (grade >= 16)
-{
-    printf("Grade 16+\n");
-}
-else
-{
-    printf("Grade %i\n", grade);
-}
+    if (grade < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else if (grade >= 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else
+    {
+        printf("Grade %i\n", grade);
+    }
 }
 
 
