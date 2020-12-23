@@ -14,10 +14,10 @@ int main(int argc, string argv[])
         return 1;
     }
     
-     //reject nondigit
+    //reject nondigit
     string initialkey = argv[1]; 
     int a = 1;
-    for (int i = 0; i <strlen(initialkey); i++)
+    for (int i = 0; i < strlen(initialkey); i++)
     {
         a = isdigit(initialkey[i]); 
         if (a == 0)
@@ -36,9 +36,9 @@ int main(int argc, string argv[])
     }
     //if key is too large, adjust it
     while (key > 26)
-        {
-            key = key - 26;
-        }
+    {
+        key = key - 26;
+    }
     
     //get string input
     string message = get_string("plaintext: ");
@@ -48,13 +48,13 @@ int main(int argc, string argv[])
     int crypt[strlen(message)];
     
     //convert string input via key
-    for (int i =0; i <strlen(message); i++)
+    for (int i = 0; i < strlen(message); i++)
     {   
         //preserve punctuation, spaces, etc.
         if (message[i] < 65 && message [i] > 31)
-            {
-                crypt[i] = message [i];
-            }
+        {
+            crypt[i] = message [i];
+        }
         //preserve capitalizations
         else if (message[i] < 91 && message[i] > 64)
         {
