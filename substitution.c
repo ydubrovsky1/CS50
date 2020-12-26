@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-
+#include <strings.h>
 
 int main(int argc, string argv[])
 {
@@ -18,8 +18,8 @@ int main(int argc, string argv[])
         printf("Error. Input 26 character key.\n");
         return 1;
     }
-    string alpha = argv[1];
     //reject if each character is not a letter
+    string alpha = argv[1];
     for (int i = 0; i < strlen(alpha); i++)
     {
         if (isalpha(alpha[i]) == 0)
@@ -28,6 +28,14 @@ int main(int argc, string argv[])
             return 1;
         }
     }
+    //reject if duplicate characters in key
+    string s1 = "abcdefghijklmnopqrstuvwxyz";
+    if (strcasecmp(s1, alpha) != 0)
+    {
+        printf("Error. Use each letter only once.\n");
+        return 1;
+    }
+    
     //convert key to numbers 1-26
     int key[strlen(alpha)];
     int sum = 0;
@@ -42,12 +50,6 @@ int main(int argc, string argv[])
             key[i] = alpha [i];
         }
         sum = sum + key[i];
-    }
-    //check if each letter used only once, use "sum" from above
-    if (sum != 2847)
-    {
-        printf("Error. Each letter should be used only once.\n");
-        return 1;
     }
     //get plaintext message from user
     string plaintext = get_string("plaintext:");
