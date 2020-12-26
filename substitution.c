@@ -51,7 +51,7 @@ int main(int argc, string argv[])
     }
     //get plaintext message from user
     string plaintext = get_string("plaintext:");
-    printf("\ncyphertext:");
+    printf("ciphertext: ");
     
     //convert string input via key
     int crypt[strlen(plaintext)];
