@@ -101,16 +101,14 @@ void print_winner(void)
         }
             
     }
-    //print the winner (person in final array position got most votes)
-    printf("%s", candidates[candidate_count].name);
-    for (int i = 1; i < candidate_count; i++)
+    //print the winner (person in final array position got most votes), and any ties
+    for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[candidate_count - i].votes == candidates[candidate_count].votes)
         
-        printf("\n%s", candidates[candidate_count - i].name);
+        printf("%s\n", candidates[candidate_count - i].name);
     }
     
-    printf("\n");
     return;
 }
 
