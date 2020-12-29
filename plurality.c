@@ -90,12 +90,12 @@ void print_winner(void)
         for (int i = 0; i < candidate_count; i++)
         {   
             a = 0; 
-            if (candidates[i].votes > candidates[i+1].votes)
+            if (candidates[i].votes > candidates[i + 1].votes)
             {
                 candidate swap1 = candidates[i];
-                candidate swap2 = candidates[i+1];
+                candidate swap2 = candidates[i + 1];
                 candidates[i] = swap2;
-                candidates[i+1] = swap1;
+                candidates[i + 1] = swap1;
                 a = a + 1; 
             }
         }
@@ -104,10 +104,12 @@ void print_winner(void)
     //print the winner (person in final array position got most votes)
     printf("%s", candidates[candidate_count].name);
     for (int i = 1; i < candidate_count; i++)
-        {
-            if (candidates[candidate_count - i].votes == candidates[candidate_count].votes)
-                printf("\n%s", candidates[candidate_count - i].name);
-        }
+    {
+        if (candidates[candidate_count - i].votes == candidates[candidate_count].votes)
+        
+        printf("\n%s", candidates[candidate_count - i].name);
+    }
+    
     printf("\n");
     return;
 }
