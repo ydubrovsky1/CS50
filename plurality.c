@@ -86,23 +86,23 @@ void print_winner(void)
     int a = 1; 
     while (a != 0)
     {
+        a = 0;
         //keep swapping consecutive numbers until all in order
-        for (int i = 0; i < candidate_count; i++)
+        for (int i = 0; i < (candidate_count - 1); i++)
         {   
-            a = 0; 
             if (candidates[i].votes > candidates[i + 1].votes)
             {
                 candidate swap1 = candidates[i];
                 candidate swap2 = candidates[i + 1];
                 candidates[i] = swap2;
-                candidates[i + 1] = swap1;
+                candidates[i + 1] = swap1; 
                 a = a + 1; 
             }
         }
             
     }
     //print the winner (person in final array position got most votes), and any ties
-    for (int i = 1; i < candidate_count; i++)
+    for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[candidate_count - i].votes == candidates[candidate_count - 1].votes)
         
@@ -110,6 +110,5 @@ void print_winner(void)
     }
     
     return;
+
 }
-
-
