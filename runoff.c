@@ -240,7 +240,7 @@ bool is_tie(int min)
 void eliminate(int min)
 {
     // loop through candidates still in election to determine who has the min vote count
-    for (int i = 0; i < (candidate_count - 1); i++)
+    for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == min)
         {
