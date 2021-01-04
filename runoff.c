@@ -168,7 +168,7 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-     for (int j = 0; j < candidate_count - 1; j++)
+     for (int j = 0; j < candidate_count; j++)
     {
     //search unsorted data to find smallest
     candidate smallest = candidates[j];
