@@ -202,7 +202,7 @@ int find_min(void)
 {
     int minvotes = 101; 
     // loop through candidates to find lowest vote count candidate still in the race
-    for (int i = 0; i < (candidate_count - 1); i++)
+    for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].eliminated == false)
         {
@@ -221,7 +221,7 @@ int find_min(void)
 bool is_tie(int min)
 {
     //loop through candidates still in election to check if all candidates have the minimum vote
-    for (int i = 0; i < (candidate_count - 1); i++)
+    for (int i = 0; i < candidate_count; i++)
         {
             if (candidates[i].eliminated == false)
             {
