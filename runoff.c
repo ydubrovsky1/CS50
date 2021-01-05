@@ -152,12 +152,8 @@ void tabulate(void)
             int j = preferences[i][k];
             if (candidates[j].eliminated == false)
             {
-                candidates[j].votes++;
+                candidates[j].votes = candidates[j].votes + 1;
                 k = candidate_count;
-            }
-            else 
-            {
-                k++;
             }
         }
         
@@ -168,29 +164,20 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-     for (int j = 0; j < candidate_count; j++)
+     candidate biggest = candidates[0];
+     for (int j = 1; j < candidate_count; j++)
     {
-    //search unsorted data to find smallest
-    candidate smallest = candidates[j];
-    int c = j;
-    for (int i = j; i < (candidate_count - 1); i++)
-    {
-        if (smallest.votes > candidates[i+1].votes)
+        //search unsorted data to find smallest
+        if (biggest.votes < candidates[j].votes)
         {
-            smallest = candidates[i+1];
-            c = i + 1;  
+            biggest = candidates[j];
         }
-    }
-    //swap smallest with first element unsorted part
-    candidate swap1 = candidates[c];
-    candidates[c] = candidates[j];
-    candidates[j] = swap1;
     }
     
     //print the winner (person in final array position, if they got at least 50% of the vote)
-    if (candidates[candidate_count - 1].votes > (voter_count/2))
+    if (biggest.votes > (voter_count/2))
     {
-       printf("%s", candidates[candidate_count - 1].name);
+       printf("%s", biggest.name);
        return true;
     }
 
@@ -247,6 +234,5 @@ void eliminate(int min)
             candidates[i].eliminated = true;
         }
     }
-    
     return;
 }
