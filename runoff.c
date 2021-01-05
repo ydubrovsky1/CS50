@@ -167,14 +167,14 @@ bool print_winner(void)
      candidate biggest = candidates[0];
      for (int j = 1; j < candidate_count; j++)
     {
-        //search unsorted data to find smallest
+        //search unsorted data to find biggest
         if (biggest.votes < candidates[j].votes)
         {
             biggest = candidates[j];
         }
     }
     
-    //print the winner (person in final array position, if they got at least 50% of the vote)
+    //print the winner if they got at least 50% of the vote)
     if (biggest.votes > (voter_count/2))
     {
        printf("%s", biggest.name);
