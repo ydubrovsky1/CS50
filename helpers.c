@@ -125,32 +125,32 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
         
     }
     
-    //blur pixels left and right edge middle
+    //blur pixels left and right edge (except corners)
      for (int i = 1; i < (height - 1); i++)
     {
-        int red = 0; 
-        int green = 0;
-        int blue = 0;
-        int red1 = 0;
-        int green1 = 0;
-        int blue1 = 0;
+        double red = 0; 
+        double green = 0;
+        double blue = 0;
+        double red_r = 0;
+        double green_r = 0;
+        double blue_r = 0;
         for (int b = -1; b < 2; b++)
         {
             red += image[i + b][0].rgbtRed + image[i + b][1].rgbtRed;
             green += image[i + b][0].rgbtGreen + image[i + b][1].rgbtGreen;
             blue += image[i + b][0].rgbtBlue + image[i + b][1].rgbtBlue;
-            red1 += image[i + b][width - 1].rgbtRed + image[i + b][width - 2].rgbtRed;
-            green1 += image[i + b][width - 1].rgbtGreen + image[i + b][width - 2].rgbtGreen;
-            blue1 += image[i + b][width - 1].rgbtBlue + image[i + b][width - 2].rgbtBlue;
+            red_r += image[i + b][width - 1].rgbtRed + image[i + b][width - 2].rgbtRed;
+            green_r += image[i + b][width - 1].rgbtGreen + image[i + b][width - 2].rgbtGreen;
+            blue_r += image[i + b][width - 1].rgbtBlue + image[i + b][width - 2].rgbtBlue;
             
         }
         
         blurred[i][0].rgbtRed = round(red / 6);
         blurred[i][0].rgbtGreen = round(green / 6);
         blurred[i][0].rgbtBlue = round(blue / 6);
-        blurred[i][width - 1].rgbtRed = round(red1 / 6);
-        blurred[i][width - 1].rgbtGreen = round(green1 / 6);
-        blurred[i][width - 1].rgbtBlue = round(blue1 / 6);
+        blurred[i][width - 1].rgbtRed = round(red_r / 6);
+        blurred[i][width - 1].rgbtGreen = round(green_r / 6);
+        blurred[i][width - 1].rgbtBlue = round(blue_r / 6);
         
     }
     
