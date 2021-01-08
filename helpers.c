@@ -91,9 +91,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                         blue += image[i + a][j + b].rgbtBlue;
                     }
                 }
-                blurred[i][j].rgbtRed = round(red / 9);
-                blurred[i][j].rgbtGreen = round(green / 9);
-                blurred[i][j].rgbtBlue = round(blue / 9);
+                blurred[i][j].rgbtRed = round(red / 9.0);
+                blurred[i][j].rgbtGreen = round(green / 9.0);
+                blurred[i][j].rgbtBlue = round(blue / 9.0);
             }
     }
     //blur pixel top and bottom row (except corners)
@@ -116,12 +116,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             
         }
         
-        blurred[0][j].rgbtRed = round(red / 6);
-        blurred[0][j].rgbtGreen = round(green / 6);
-        blurred[0][j].rgbtBlue = round(blue / 6);
-        blurred[height - 1][j].rgbtRed = round(red_b / 6);
-        blurred[height - 1][j].rgbtGreen = round(green_b / 6);
-        blurred[height - 1][j].rgbtBlue = round(blue_b / 6);
+        blurred[0][j].rgbtRed = round(red / 6.0);
+        blurred[0][j].rgbtGreen = round(green / 6.0);
+        blurred[0][j].rgbtBlue = round(blue / 6.0);
+        blurred[height - 1][j].rgbtRed = round(red_b / 6.0);
+        blurred[height - 1][j].rgbtGreen = round(green_b / 6.0);
+        blurred[height - 1][j].rgbtBlue = round(blue_b / 6.0);
         
     }
     
@@ -145,12 +145,12 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             
         }
         
-        blurred[i][0].rgbtRed = round(red / 6);
-        blurred[i][0].rgbtGreen = round(green / 6);
-        blurred[i][0].rgbtBlue = round(blue / 6);
-        blurred[i][width - 1].rgbtRed = round(red_r / 6);
-        blurred[i][width - 1].rgbtGreen = round(green_r / 6);
-        blurred[i][width - 1].rgbtBlue = round(blue_r / 6);
+        blurred[i][0].rgbtRed = round(red / 6.0);
+        blurred[i][0].rgbtGreen = round(green / 6.0);
+        blurred[i][0].rgbtBlue = round(blue / 6.0);
+        blurred[i][width - 1].rgbtRed = round(red_r / 6.0);
+        blurred[i][width - 1].rgbtGreen = round(green_r / 6.0);
+        blurred[i][width - 1].rgbtBlue = round(blue_r / 6.0);
         
     }
     
