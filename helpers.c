@@ -96,32 +96,32 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 blurred[i][j].rgbtBlue = round(blue / 9);
             }
     }
-    //blur pixel top and bottom row middle
+    //blur pixel top and bottom row (except corners)
     for (int j = 1; j < (width - 1); j++)
     {
-        int red = 0; 
-        int green = 0;
-        int blue = 0;
-        int red1 = 0;
-        int green1 = 0;
-        int blue1 = 0;
+        double red = 0; 
+        double green = 0;
+        double blue = 0;
+        double red_b = 0;
+        double green_b = 0;
+        double blue_b = 0;
         for (int b = -1; b < 2; b++)
         {
             red += image[0][j + b].rgbtRed + image[1][j+b].rgbtRed;
             green += image[0][j + b].rgbtGreen + image[1][j+b].rgbtGreen;
             blue += image[0][j + b].rgbtBlue + image[1][j+b].rgbtBlue;
-            red1 += image[height - 1][j + b].rgbtRed + image[height - 2][j+b].rgbtRed;
-            green1 += image[height - 1][j + b].rgbtGreen + image[height - 2][j+b].rgbtGreen;
-            blue1 += image[height - 1][j + b].rgbtBlue + image[height - 2][j+b].rgbtBlue;
+            red_b += image[height - 1][j + b].rgbtRed + image[height - 2][j+b].rgbtRed;
+            green_b += image[height - 1][j + b].rgbtGreen + image[height - 2][j+b].rgbtGreen;
+            blue_b += image[height - 1][j + b].rgbtBlue + image[height - 2][j+b].rgbtBlue;
             
         }
         
         blurred[0][j].rgbtRed = round(red / 6);
         blurred[0][j].rgbtGreen = round(green / 6);
         blurred[0][j].rgbtBlue = round(blue / 6);
-        blurred[height - 1][j].rgbtRed = round(red1 / 6);
-        blurred[height - 1][j].rgbtGreen = round(green1 / 6);
-        blurred[height - 1][j].rgbtBlue = round(blue1 / 6);
+        blurred[height - 1][j].rgbtRed = round(red_b / 6);
+        blurred[height - 1][j].rgbtGreen = round(green_b / 6);
+        blurred[height - 1][j].rgbtBlue = round(blue_b / 6);
         
     }
     
@@ -173,9 +173,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     blurred[height - 1][0].rgbtBlue = (image[height - 1][0].rgbtBlue + image[height - 2][0].rgbtBlue + image[height - 1][1].rgbtBlue + image[height - 2][1].rgbtBlue)/4;
     
     //print blurred array to image array
-     for(int i = 1; i < (height - 1); i++)
+     for(int i = 0; i < height; i++)
     {
-        for (int j = 1; j < (width - 1); j++)
+        for (int j = 0; j < width; j++)
         {
             image[i][j] = blurred[i][j]; 
         }
