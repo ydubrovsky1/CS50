@@ -19,7 +19,7 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 100;
+const unsigned int N = 26;
 
 // Hash table 
 node *table[N];
@@ -30,7 +30,6 @@ unsigned int counter;
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // TODO
     //hash word to obtain hash value
     unsigned int index = hash(word);
     //return false if nothing at that index value
@@ -46,15 +45,13 @@ bool check(const char *word)
         temp = temp -> next;
     }
     return false;
-    //traverse linked list, looking for the word
 }
 
 // Hashes word to a number
 // djb2 hash function from http://www.cse.yorku.ca/~oz/hash.html
 unsigned int hash(const char *word)
 {
-    // TODO (input word/(alpha ''), output index 0 to N-1
-    //set has per function specs of djb2
+    // (input word/(alpha ''), output index 0 to N-1
     unsigned int hash = 5381;
     int c;
     
@@ -66,7 +63,6 @@ unsigned int hash(const char *word)
     }
     //return int hash, modulated by size of hashtable
     return hash % N;
-    return 0;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
@@ -86,16 +82,17 @@ bool load(const char *dictionary)
     //initialize counter
     counter = 0;
     
-    //allocate space for a node
+    //read words from file into buffer, one string at a time
+    while (fscanf(D_open, "%s", buffer) != EOF)
+    {
+        //allocate space for a node
         node *n = malloc(sizeof(node));
         if (n == NULL)
         {
             printf("insufficient memory for nodes.\n");
             return false;
         }
-    //read words from file into buffer, one string at a time
-    while (fscanf(D_open, "%s", buffer) != EOF)
-    {
+        
         //copy word into node
         strcpy(n -> word, buffer);
         
@@ -109,15 +106,10 @@ bool load(const char *dictionary)
         n -> next = table[index];
         table[index] = n;
         
-        //allocate space for a node
-        n = malloc(sizeof(node));
-        if (n == NULL)
-        {
-            printf("insufficient memory for nodes.\n");
-            return false;
-        }
+        //free node
+        free(n);
+      
     }
-    free(n);
     free(buffer);
     return true;
 
