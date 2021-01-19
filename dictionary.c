@@ -100,7 +100,7 @@ bool load(const char *dictionary)
         strcpy(n -> word, buffer);
         
         //increase word counter
-        counter += counter;
+        counter = counter + 1;
         
         //hash the node
         int index = hash(n -> word);
@@ -116,7 +116,7 @@ bool load(const char *dictionary)
             printf("insufficient memory for nodes.\n");
             return false;
         }
-        
+        printf("counter: %i", counter);    
     }
     free(n);
     free(buffer);
