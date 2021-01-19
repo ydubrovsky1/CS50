@@ -48,21 +48,18 @@ bool check(const char *word)
 }
 
 // Hashes word to a number
-// djb2 hash function from http://www.cse.yorku.ca/~oz/hash.html
+// https://www.cs.yale.edu/homes/aspnes/pinewiki/C(2f)HashTables.html?highlight=%28CategoryAlgorithmNotes%29 Hash functions
+//also referenced in https://cs50.stackexchange.com/questions/37209/pset5-speller-hash-function
 unsigned int hash(const char *word)
 {
-    // (input word/(alpha ''), output index 0 to N-1
-    unsigned int hash = 5381;
+    // (input word, output index 0 to N-1
+    unsigned int hash = 0;
     int c;
-    
-    //iterate through each char 
-    while ((c = *word++))
-    {
-        //actual hash function(shift hash value left 5 bits, add this to value of lowercase c)
-        hash = ((hash <<5) + hash) + tolower(c); 
-    }
-    //return int hash, modulated by size of hashtable
-    return hash % N;
+    for (int i = 0, n = strlen(word); i < n; i++)
+        {
+             hash = (hash << 2) ^ word[i];
+        }
+        return hash % N; 
 }
 
 // Loads dictionary into memory, returning true if successful, else false
@@ -114,11 +111,11 @@ bool load(const char *dictionary)
            n -> next = table[index];
            table[index] = n;
         }
-            
       
     }
      //free buffer
     free(buffer);
+    printf("successfully loaded dictionary");
     return true;
 
 }
