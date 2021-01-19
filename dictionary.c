@@ -19,7 +19,7 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 26;
+const unsigned int N = 100;
 
 // Hash table 
 node *table[N];
@@ -81,7 +81,7 @@ bool load(const char *dictionary)
     
     //initialize counter
     counter = 0;
-    
+        
     //read words from file into buffer, one string at a time
     while (fscanf(D_open, "%s", buffer) != EOF)
     {
@@ -90,9 +90,9 @@ bool load(const char *dictionary)
         if (n == NULL)
         {
             printf("insufficient memory for nodes.\n");
+            free(buffer);
             return false;
         }
-        
         //copy word into node
         strcpy(n -> word, buffer);
         
@@ -102,14 +102,22 @@ bool load(const char *dictionary)
         //hash the node
         int index = hash(n -> word);
         
-        //insert node into linked list
-        n -> next = table[index];
-        table[index] = n;
-        
-        //free node
-        free(n);
+        //add the node if it's first to link to this index location
+        if(table[index] == NULL)
+        {
+            table[index] = n;
+            n -> next = NULL;
+        }
+        //add the node if there's already a linked node at index location
+        else 
+        {
+           n -> next = table[index];
+           table[index] = n;
+        }
+            
       
     }
+     //free buffer
     free(buffer);
     return true;
 
