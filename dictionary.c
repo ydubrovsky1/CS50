@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <strings.h>
 
 // Represents a node in a hash table
 typedef struct node
@@ -30,7 +31,22 @@ unsigned int counter;
 bool check(const char *word)
 {
     // TODO
+    //hash word to obtain hash value
+    unsigned int index = hash(word);
+    //return false if nothing at that index value
+    if (table[index] == NULL)
+        return false;
+    //create traversal pointer to head of list
+    node *temp = table[index];
+    //If current node val field what look for, report success
+    while(temp != NULL)
+    {
+        if(strcasecmp(word, temp -> word) == 0)
+            return true;
+        temp = temp -> next;
+    }
     return false;
+    //traverse linked list, looking for the word
 }
 
 // Hashes word to a number
@@ -64,21 +80,22 @@ bool load(const char *dictionary)
         printf("invalid dictionary.\n");
         return false;
     }
-    //read strings from file one at a time
+    //allocate memory for buffer
     char *buffer = malloc(sizeof(char) * LENGTH);
     
     //initialize counter
     counter = 0;
-     
-    while (fscanf(D_open, "%s", buffer) != EOF)
-    {
-        //allocate space for a node
+    
+    //allocate space for a node
         node *n = malloc(sizeof(node));
         if (n == NULL)
         {
             printf("insufficient memory for nodes.\n");
             return false;
         }
+    //read words from file into buffer, one string at a time
+    while (fscanf(D_open, "%s", buffer) != EOF)
+    {
         //copy word into node
         strcpy(n -> word, buffer);
         
@@ -92,8 +109,16 @@ bool load(const char *dictionary)
         n -> next = table[index];
         table[index] = n;
         
-    }
+        //allocate space for a node
+        n = malloc(sizeof(node));
+        if (n == NULL)
+        {
+            printf("insufficient memory for nodes.\n");
+            return false;
+        }
         
+    }
+    free(n);
     free(buffer);
     return true;
 
