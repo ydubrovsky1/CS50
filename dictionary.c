@@ -116,7 +116,6 @@ bool load(const char *dictionary)
             printf("insufficient memory for nodes.\n");
             return false;
         }
-        printf("counter: %i", counter);    
     }
     free(n);
     free(buffer);
