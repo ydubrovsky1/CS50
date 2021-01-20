@@ -35,7 +35,6 @@ bool check(const char *word)
     //return false if nothing at that index value
     if (table[index] == NULL)
     {
-        printf("false");
         return false;
     }
     //create traversal pointer to head of list
@@ -121,7 +120,6 @@ bool load(const char *dictionary)
     }
      //free buffer
     free(buffer);
-    printf("successfully loaded dictionary");
     return true;
 
 }
