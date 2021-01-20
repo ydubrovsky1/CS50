@@ -25,18 +25,16 @@ const unsigned int N = 100;
 node *table[N];
 
 //create global variable counter
-unsigned int counter;
+unsigned int counter = 0;
 
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    printf("checking");
     //hash word to obtain hash value
     unsigned int index = hash(word);
     //return false if nothing at that index value
     if (table[index] == NULL)
     {
-        printf("false");
         return false;
     }
     //create traversal pointer to head of list
@@ -46,12 +44,10 @@ bool check(const char *word)
     {
         if(strcasecmp(word, temp -> word) == 0)
         {
-            printf("true");
             return true;
             temp = temp -> next;
         }
     }
-    printf("false2");
     return false;
 }
 
@@ -82,6 +78,12 @@ bool load(const char *dictionary)
     }
     //allocate memory for buffer
     char *buffer = malloc(sizeof(char) * LENGTH);
+    if (buffer == NULL)
+    {
+        printf("insufficent memory for buffer.\n");
+        fclose(D_open);
+        return false;
+    }
     
     //initialize counter
     counter = 0;
@@ -95,6 +97,7 @@ bool load(const char *dictionary)
         {
             printf("insufficient memory for nodes.\n");
             free(buffer);
+            fclose(D_open);
             return false;
         }
         //copy word into node
@@ -137,7 +140,6 @@ unsigned int size(void)
         return counter; 
     else
         return 0;
-    
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
