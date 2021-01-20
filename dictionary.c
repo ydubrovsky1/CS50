@@ -30,11 +30,13 @@ unsigned int counter;
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
+    printf("checking");
     //hash word to obtain hash value
     unsigned int index = hash(word);
     //return false if nothing at that index value
     if (table[index] == NULL)
     {
+        printf("false");
         return false;
     }
     //create traversal pointer to head of list
@@ -44,10 +46,12 @@ bool check(const char *word)
     {
         if(strcasecmp(word, temp -> word) == 0)
         {
+            printf("true");
             return true;
             temp = temp -> next;
         }
     }
+    printf("false2");
     return false;
 }
 
@@ -117,22 +121,6 @@ bool load(const char *dictionary)
            table[index] = n;
         }
       
-    }
-    for(int j =0; j < N; j++)
-    {
-        if(table[j]==NULL)
-            printf("NULL%i", j);
-        else
-        {
-            printf("head%i is %s", j, table[j] -> word);
-            node *print = table[j];
-            while(print -> next !=NULL)
-            {
-                print = print ->next;
-                printf("node %s", print -> word);
-            }
-        }
-            
     }
     //close file
     fclose(D_open);
