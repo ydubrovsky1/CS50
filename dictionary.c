@@ -45,8 +45,8 @@ bool check(const char *word)
         if(strcasecmp(word, temp -> word) == 0)
         {
             return true;
-            temp = temp -> next;
         }
+        temp = temp -> next;
     }
     return false;
 }
