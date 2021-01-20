@@ -118,6 +118,22 @@ bool load(const char *dictionary)
         }
       
     }
+    for(int j =0; j < N; j++)
+    {
+        if(table[j]==NULL)
+            printf("NULL%i", j);
+        else
+        {
+            printf("head%i is %s", j, table[j] -> word);
+            node *print = table[j];
+            while(print -> next !=NULL)
+            {
+                print = print ->next;
+                printf("node %s", print -> word);
+            }
+        }
+            
+    }
     //close file
     fclose(D_open);
      //free buffer
