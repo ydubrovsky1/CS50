@@ -118,6 +118,8 @@ bool load(const char *dictionary)
         }
       
     }
+    //close file
+    fclose(D_open);
      //free buffer
     free(buffer);
     return true;
