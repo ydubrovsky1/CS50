@@ -58,7 +58,8 @@ def main():
 # function to find substrings STRs in DNA string.
 #Substring finder code from: <https://stackoverflow.com/questions/11476713/determining-how-many-times-a-substring-occurs-in-a-string-in-python>.
 def compare(DNA, STR):
-    #define variables
+    
+    # define variables
     count = 0
     flag = True
     start = 0
@@ -77,7 +78,7 @@ def compare(DNA, STR):
         else:
             count += 1
             end = len(STR)
-            DNA = DNA[a + len(STR) : len(DNA)]
+            DNA = DNA[a + len(STR): len(DNA)]
      
     while len(DNA) > 2:
         start = 0
@@ -85,12 +86,12 @@ def compare(DNA, STR):
         count2 = 0
         flag1 = True
         
-        #retrun count if no instance of substring at all in this shortened DNA string
+        # retrun count if no instance of substring at all in this shortened DNA string
         b = DNA.find(STR, start, end)
         if b == -1:
             return count
         
-        #if instances present, count consecutive instances
+        # if instances present, count consecutive instances
         while flag1: 
             b = DNA.find(STR, start, end)
             if b == -1:
@@ -98,11 +99,11 @@ def compare(DNA, STR):
                     count = count2
                 flag1 = False
             else:
-                    count2 +=1
-                    end = (len(STR))
-                    DNA = DNA[b + len(STR) : len(DNA)]
+                count2 +=1
+                end = (len(STR))
+                DNA = DNA[b + len(STR): len(DNA)]
     return count
 
-#run main
+# run main
 if __name__ == "__main__":
     main()
