@@ -91,11 +91,15 @@ def buy():
         
         # ensure number of stocks greater than 0
         if int(shares) < 1:
-            return apology("please enter positive number of stocks to buy")
+            return apology("please enter positive number of stocks to buy", 400)
             
         # ensure stock exists
         elif not lookup(symbol):
-            return apology("stock not found")
+            return apology("stock not found", 400)
+            
+        if not shares.isnumeric():
+            return apology("Please enter numeric values only", 400)
+            
         
         # calculate variables for the portfolio
         else:
@@ -197,7 +201,12 @@ def quote():
     if request.method == "POST":
         symbol = request.form.get("symbol")
         result = lookup(symbol)
-        return render_template("quoted.html", result = result)
+        if not request.form.get("symbol"):
+             return apology("Please Input Valid Stock", 400)
+        if not lookup(symbol):
+            return apology("Stock Not Found", 400)
+        else:
+            return render_template("quoted.html", result = result)
     
     else:
         return render_template("quote.html")
