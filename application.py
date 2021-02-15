@@ -48,15 +48,15 @@ if not os.environ.get("API_KEY"):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    #get the individual's username
+    # get the individual's username
     placeholder = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
     username = placeholder[0]["username"]
     
-    #use individual's username to retrieve data from portfolio and user databases
+    # use individual's username to retrieve data from portfolio and user databases
     portfolio = db.execute("SELECT id, symbol, shares, price, total FROM portfolio WHERE username = ?", username)
     users = db.execute("SELECT id, cash FROM users WHERE username = ?", username)
     
-    #live update values of the stocks, and the total value of each stock
+    # live update values of the stocks, and the total value of each stock
     for row in portfolio:
         ID = row["id"]
         symbol = row["symbol"]
@@ -66,16 +66,15 @@ def index():
         if shares > 0:
             db.execute("UPDATE portfolio SET price = ?, total = ? WHERE id = ?", value, total_value, ID)
         
-    
-    #calculate users total value stocks+cash
+    # calculate users total value stocks+cash
     cash = float(users[0]["cash"])
     total = float(cash)
     for row in portfolio:
         total += float(row["total"])
     
-    #display user portfolio
+    # display user portfolio
     portfolio1 = db.execute("SELECT symbol, SUM(shares), price, SUM(total) FROM portfolio WHERE username = ? GROUP BY symbol", username)
-    return render_template("index.html", portfolio1=portfolio1, users=users, total = total)
+    return render_template("index.html", portfolio1=portfolio1, users=users, total=total)
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -100,38 +99,34 @@ def buy():
         if not shares.isnumeric():
             return apology("Please enter numeric values only", 400)
             
-        
         # calculate variables for the portfolio
         else:
             cash_key = db.execute("SELECT cash FROM users WHERE id = ?", session["user_id"])
             
             cash = float(cash_key[0]["cash"])
             price = result1["price"]
-            total = float (price) * float(shares)
+            total = float(price) * float(shares)
             funds = cash - total
             
-            #ensure user has sufficient funds
+            # ensure user has sufficient funds
             if total > cash:
                 return apology("insufficient funds")
                 
-            #lookup username
+            # lookup username
             placeholder = db.execute("SELECT username FROM users WHERE id = ?", session["user_id"])
             username = placeholder[0]["username"]
             
-            
-            #update users total cash remaining
+            # update users total cash remaining
             db.execute("UPDATE users SET cash = ? WHERE username = ?", funds, username)
             
-            #add a new entry to the database, including datetime
+            # add a new entry to the database, including datetime
             date = datetime.now()
             db.execute("INSERT INTO portfolio (username, symbol, shares, price, total, funds, Date) VALUES (?,?,?, ?, ?, ?, ?)", username, symbol, shares, price, total, funds, date)
-            
             
             return redirect("/")
     else:
         return render_template("buy.html")
   
-
 
 @app.route("/history")
 @login_required
@@ -206,7 +201,7 @@ def quote():
         if not lookup(symbol):
             return apology("Stock Not Found", 400)
         else:
-            return render_template("quoted.html", result = result)
+            return render_template("quoted.html", result=result)
     
     else:
         return render_template("quote.html")
@@ -294,7 +289,7 @@ def sell():
         return redirect("/")
             
     else:
-        return render_template("sell.html", portfolio = portfolio)
+        return render_template("sell.html", portfolio=portfolio)
 
 
 def errorhandler(e):
